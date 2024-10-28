@@ -7,7 +7,7 @@ import 'package:lottie/lottie.dart';
 class Weather extends StatefulWidget {
 
   final String city_name;
-  const Weather({required this.city_name});
+  const Weather({super.key, required this.city_name});
 
   @override
   State<Weather> createState() => _WeatherState();
@@ -15,13 +15,13 @@ class Weather extends StatefulWidget {
 
 class _WeatherState extends State<Weather> {
 
-  String _apiKey = "c691bac79ed1c903278f2db077f4b80f";
+  final String _apiKey = "c691bac79ed1c903278f2db077f4b80f";
   String _weather = "Loading...";
   String _description = "";
   String _temperature = "";
   String _humidity="";
   String _pressure="";
-  String _wind="";
+  final String _wind="";
  
    _fetchWeather() async {
     var url = Uri.parse(
@@ -93,14 +93,14 @@ class _WeatherState extends State<Weather> {
       backgroundColor: const Color.fromARGB(255, 195, 208, 215),
       body: SingleChildScrollView(
         child: SafeArea(
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text( 
-                  '${widget.city_name}',
-                  style: TextStyle(
+                  widget.city_name,
+                  style: const TextStyle(
                   fontSize: 25, 
                   fontWeight: FontWeight.w400 , 
                   color: Color.fromARGB(255, 59, 65, 68),
@@ -108,49 +108,49 @@ class _WeatherState extends State<Weather> {
                 ),
                 Text(
                   "$formattedDate  $formattedTime",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20
                   ),
                 ),
-                SizedBox(height: 50,),
+                const SizedBox(height: 50,),
                 Lottie.asset(getWeatherAnimation(_weather), height: 150),
-                SizedBox(height: 50,),
+                const SizedBox(height: 50,),
 
                 Text(
                   '$_temperature °C',
-                  style: TextStyle(fontSize: 30),
+                  style: const TextStyle(fontSize: 30),
                 ),
           
                 Text(
-                  '$_description',
-                  style: TextStyle(fontSize: 18),
+                  _description,
+                  style: const TextStyle(fontSize: 18),
                 ),
-                SizedBox(height: 150,),
+                const SizedBox(height: 150,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Column(
                       children: [
-                        Icon(Icons.water_drop),
-                        Text("Humidity"),
+                        const Icon(Icons.water_drop),
+                        const Text("Humidity"),
                         Text(
                           '$_humidity %',
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ],
                     ),
-                    Container(
+                    SizedBox(
                       height: 30,
-                      child: VerticalDivider(thickness: 1, color: Color.fromARGB(255, 121, 119, 119),)
+                      child: const VerticalDivider(thickness: 1, color: Color.fromARGB(255, 121, 119, 119),)
                     ),
                     Column(
                       children: [
-                        Icon(Icons.thermostat),
-                        Text("Pressure"),
+                        const Icon(Icons.thermostat),
+                        const Text("Pressure"),
                         Text(
                           ' $_pressure Pa',
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ],
                     ),

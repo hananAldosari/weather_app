@@ -6,7 +6,7 @@ import 'package:lottie/lottie.dart';
 import 'package:weather_app/weather_info.dart';  
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
@@ -14,7 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   TextEditingController city_controller = TextEditingController();
-  String _apiKey = "c691bac79ed1c903278f2db077f4b80f";
+  final String _apiKey = "c691bac79ed1c903278f2db077f4b80f";
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +22,21 @@ class _HomeState extends State<Home> {
       backgroundColor: const Color.fromARGB(255, 195, 208, 215),
       body: SingleChildScrollView(
         child: SafeArea(
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Lottie.asset('assets/home.json'),
                   ),
         
                   Wrap(
                     children: [
-                      Text(
+                      const Text(
                         "Enter City to", 
                         style:TextStyle(
                           fontSize:25, 
@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
                           ) 
                         ,),
                       Padding(
-                        padding: EdgeInsets.only(left: 20),
+                        padding: const EdgeInsets.only(left: 20),
                         child: Text(
                           "Wethaer Forecast",
                           style:TextStyle(
@@ -58,44 +58,44 @@ class _HomeState extends State<Home> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20,),
-                  Container(
+                  const SizedBox(height: 20,),
+                  SizedBox(
                     height: 60,
                     child: TextField(
                       controller: city_controller,
                       decoration: InputDecoration(
                         suffixIcon: IconButton(
                           onPressed: () async{
-                            String city_name = city_controller.text; 
+                            String cityName = city_controller.text; 
                             var url = Uri.parse(
-                            'http://api.openweathermap.org/data/2.5/weather?q=${city_name}&units=metric&appid=$_apiKey');
+                            'http://api.openweathermap.org/data/2.5/weather?q=$cityName&units=metric&appid=$_apiKey');
                             var response = await http.get(url);
-                            if (city_name.isNotEmpty) {
+                            if (cityName.isNotEmpty) {
                               if (response.statusCode == 200){
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Weather(city_name: city_name), // Pass the city_name here
+                                  builder: (context) => Weather(city_name: cityName), // Pass the city_name here
                                 ),
                               );
                             }else if (response.statusCode == 404) {
                               // City not found
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('City not found. Please enter a valid city name.')),
+                                const SnackBar(content: Text('City not found. Please enter a valid city name.')),
                               );
                             } else {
                               // Other errors
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Something went wrong. Please try again.')),
+                                const SnackBar(content: Text('Something went wrong. Please try again.')),
                               );
                             }
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Please enter a city name')),
+                                const SnackBar(content: Text('Please enter a city name')),
                               );
                             }
                           },
-                          icon: Icon( Icons.search)
+                          icon: const Icon( Icons.search)
                           ),
                         hintText: "Search city",
                           filled: true,
@@ -105,7 +105,7 @@ class _HomeState extends State<Home> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(color: Color.fromARGB(255, 97, 116, 131),)
+                            borderSide: const BorderSide(color: Color.fromARGB(255, 97, 116, 131),)
                           ),
                         ),
                     ),
