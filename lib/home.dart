@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
               listener: (context, state) {
                 if(state is HandleTextState){
                   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("${state.errorMessage}"))
+                      SnackBar(content: Text(state.errorMessage))
                   );
                 }else if(state is WeatherInfoState){
                   Navigator.push(
